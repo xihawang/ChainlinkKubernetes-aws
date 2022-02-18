@@ -13,3 +13,23 @@ kubectl create secret generic password-env --from-file=.password -n chainlink-oc
 
 ##create configmap
 kubectl create configmap node-env --from-literal ROOT=/chainlink --from-literal LOG_LEVEL=debug --from-literal ETH_CHAIN_ID=1 --from-literal CHAINLINK_TLS_PORT=0 --from-literal SECURE_COOKIES=false --from-literal ALLOW_ORIGINS=* --from-literal ETH_URL=<INSERT-ETH-WSS> --from-literal DATABASE_URL=<INSERT-DATBASE-URL> --from-literal DATABASE_TIMEOUT=0 -n chainlink-ocr
+
+  
+  
+kubectl get configMaps -n namespace
+kubectl get secrets -n namespace
+
+#create service
+  kubectl apply -f gcpservice.yaml  -n chainlink-ocr
+  kubectl apply -f service.yaml  -n chainlink-ocr
+  
+#deploy
+ 
+  kubectl apply -f deploy.yaml
+  kubectl get all -n namesapce
+  kubectl logs -n kube-system pod
+  
+  
+  
+  kubectl port-forward <POD-NAME> 6688:6688
+  
