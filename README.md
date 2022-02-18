@@ -5,7 +5,9 @@ This repo is the ellan Kubernetes setup for deploying Chainlink nodes. Each depl
 
 
 echo "user@example.com" > .api
+
 echo "password" > .api
+
 echo "my_wallet_password" > .password
 
 kubectl create secret generic api-env --from-file=.api -n chainlink-ocr
