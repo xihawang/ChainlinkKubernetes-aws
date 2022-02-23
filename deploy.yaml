@@ -13,6 +13,9 @@ spec:
     metadata:
       labels:
         app: chainlink-node
+    #spec: pod 关联节点
+    #  nodeName: ip-10-1-127-210.ap-southeast-1.compute.internal
+        app: chainlink-node
     spec:
       containers:
         - name: chainlink
