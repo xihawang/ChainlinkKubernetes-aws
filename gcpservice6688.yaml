@@ -1,8 +1,8 @@
 apiVersion: "v1"
 kind: "Service"
 metadata:
-  name: "chainlink-deployment-service-6688"
-  namespace: "chainlink-ocr"
+  name: "chainlink-deployment-service"
+  namespace: "chainlink-fm"
   labels:
     app: "chainlink-node"
 spec:
