@@ -14,8 +14,8 @@ metadata:
 spec:
   ports:
   - protocol: "TCP"
-    port: 6689
-    targetPort: 6689
+    port: 9032
+    targetPort: 9032
   selector:
     app: "chainlink-node"
   type: "LoadBalancer"
