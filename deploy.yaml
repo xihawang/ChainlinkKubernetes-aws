@@ -1,42 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: chainlink-deployment
-  labels:
-    app: chainlink-node
+  name: coinapi
+  namespace: chainlink-adapter
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: chainlink-node
+      app: chainlink-adapter
   template:
     metadata:
       labels:
-        app: chainlink-node
-    #spec: pod 关联节点
-    #  nodeName: ip-10-1-127-210.ap-southeast-1.compute.internal
-        app: chainlink-node
+        app: chainlink-adapter
     spec:
       containers:
-        - name: chainlink
-          image: smartcontract/chainlink:1.1.1
-          args: ["local", "n", "-p",  "/chainlink/.password", "-a", "/chainlink/.api"]
-          envFrom:
-          - configMapRef:
-              name: node-env
-          ports:
-          - containerPort: 6688
-          volumeMounts:
-            - name: api-volume
-              mountPath: /chainlink/.api
-              subPath: .api
-            - name: password-volume
-              mountPath: /chainlink/.password
-              subPath: .password
-      volumes:
-        - name: api-volume
-          secret:
-            secretName: api-env
-        - name: password-volume
-          secret:
-            secretName: password-env
+      - env:
+        - name: API_KEY
+          value: FE90E0B9-1079-4563-809F-C1FACD80499D
+        - name: EXPERIMENTAL_METRICS_ENABLED
+          value: "true"
+        - name: METRICS_PORT
+          value: "9080"
+        - name: RATE_LIMIT_API_TIER
+          value: professional
+        image: public.ecr.aws/chainlink/adapters/coinapi-adapter:1.0.5
+        imagePullPolicy: Always
+        name: coinapi
+        ports:
+        - containerPort: 8080
+          name: web
+          protocol: TCP
+        - containerPort: 9080
+          name: metrics
+          protocol: TCP
